@@ -1,0 +1,279 @@
+/* ===================================================
+   UI Components — Top Bar, Modals, Edit Mode,
+   Toast Notifications
+   =================================================== */
+
+/* ---- TOP BAR (controls) ---- */
+.cv-topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 50px;
+  background: rgba(15, 32, 39, 0.95);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px;
+  gap: 10px;
+  z-index: 1000;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+}
+
+.topbar-btn {
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  color: var(--sidebar-accent);
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.topbar-btn:hover {
+  background: rgba(34, 211, 238, 0.2);
+  border-color: var(--sidebar-accent);
+  transform: translateY(-1px);
+}
+
+.topbar-btn.primary {
+  background: var(--sidebar-accent);
+  color: var(--sidebar-bg);
+  border-color: var(--sidebar-accent);
+}
+
+.topbar-btn.primary:hover {
+  background: #06b6d4;
+  box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+}
+
+.topbar-btn.danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.topbar-btn.danger:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #f87171;
+}
+
+.topbar-btn.save-btn {
+  background: rgba(34, 197, 94, 0.1);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+.topbar-btn.save-btn:hover {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: #4ade80;
+}
+
+.topbar-brand {
+  margin-right: auto;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-brand .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pulse 2s infinite;
+}
+
+/* ---- MODALS (Login + Token) ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: var(--border-radius);
+  padding: 36px 32px;
+  width: 380px;
+  max-width: 90vw;
+  box-shadow: var(--shadow-xl);
+  transform: translateY(20px) scale(0.95);
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active .modal-box {
+  transform: translateY(0) scale(1);
+}
+
+.modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--sidebar-bg);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.modal-subtitle {
+  font-size: 0.85rem;
+  color: var(--content-muted);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.form-group { margin-bottom: 16px; }
+
+.form-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--content-heading);
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--content-divider);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-primary);
+  color: var(--content-text);
+  transition: var(--transition);
+  background: var(--content-card-bg);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--content-accent);
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
+}
+
+.form-error {
+  color: #ef4444;
+  font-size: 0.78rem;
+  margin-top: 6px;
+  display: none;
+}
+
+.form-error.show {
+  display: block;
+  animation: shake 0.4s ease;
+}
+
+.modal-actions { display: flex; gap: 10px; margin-top: 24px; }
+
+.modal-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1.5px solid transparent;
+}
+
+.modal-btn.cancel {
+  background: var(--content-card-bg);
+  color: var(--content-muted);
+  border-color: var(--content-divider);
+}
+
+.modal-btn.cancel:hover { background: var(--content-divider); }
+
+.modal-btn.login {
+  background: var(--content-accent);
+  color: #fff;
+  border-color: var(--content-accent);
+}
+
+.modal-btn.login:hover {
+  background: #0e7490;
+  box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
+}
+
+/* ---- EDIT MODE ---- */
+.edit-mode [contenteditable="true"] {
+  outline: 2px dashed rgba(34, 211, 238, 0.4);
+  outline-offset: 3px;
+  border-radius: 4px;
+  padding: 2px 4px;
+  cursor: text;
+  transition: var(--transition);
+  min-height: 1em;
+}
+
+.edit-mode [contenteditable="true"]:hover {
+  outline-color: rgba(34, 211, 238, 0.7);
+  background: rgba(34, 211, 238, 0.04);
+}
+
+.edit-mode [contenteditable="true"]:focus {
+  outline: 2px solid var(--sidebar-accent);
+  background: rgba(34, 211, 238, 0.06);
+}
+
+.edit-indicator {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: var(--sidebar-accent);
+  color: var(--sidebar-bg);
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(34, 211, 238, 0.3);
+  z-index: 999;
+  animation: slideUp 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---- TOAST NOTIFICATION ---- */
+.toast {
+  position: fixed;
+  bottom: 20px; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--sidebar-bg);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  z-index: 3000;
+  transition: transform 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.success { border-left: 4px solid #4ade80; }
+.toast.error { border-left: 4px solid #f87171; }
+.toast.info { border-left: 4px solid var(--sidebar-accent); }

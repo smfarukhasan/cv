@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="S. M. Faruk Hasan — Full Stack Developer | Web & Mobile Solutions | AI Prompt Engineer. View CV, download PDF, or explore projects.">
+  <title>S. M. Faruk Hasan — CV | Full Stack Developer</title>
+  <link rel="icon" href="ss.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Bar Controls -->
+  <nav class="cv-topbar" id="topbar">
+    <div class="topbar-brand"><span class="dot"></span>Faruk's CV</div>
+    <button class="topbar-btn" id="btn-theme" title="Toggle Dark/Light Mode" onclick="toggleTheme()"><i class="fas fa-moon"></i> Theme</button>
+    <button class="topbar-btn primary" id="btn-download" title="Download as PDF" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> PDF Download</button>
+    <button class="topbar-btn" id="btn-login" title="Login to Edit" onclick="showLoginModal()"><i class="fas fa-lock"></i> Login</button>
+    <button class="topbar-btn hidden" id="btn-gh-token" title="Manage GitHub Token" onclick="showTokenModal()"><i class="fab fa-github"></i> Token</button>
+    <button class="topbar-btn save-btn hidden" id="btn-save" onclick="saveChanges()"><i class="fas fa-save"></i> Save</button>
+    <button class="topbar-btn danger hidden" id="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </nav>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal-box">
+      <h2 class="modal-title">🔐 Login</h2>
+      <p class="modal-subtitle">Enter your credentials to edit the CV</p>
+      <div class="form-group">
+        <label class="form-label" for="login-uid">User ID</label>
+        <input type="text" class="form-input" id="login-uid" placeholder="Enter User ID" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="login-pass">Password</label>
+        <input type="password" class="form-input" id="login-pass" placeholder="Enter Password" autocomplete="off">
+      </div>
+      <p class="form-error" id="login-error">❌ Invalid credentials. Please try again.</p>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" onclick="hideLoginModal()">Cancel</button>
+        <button class="modal-btn login" onclick="attemptLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GitHub Token Modal -->
+  <div class="modal-overlay" id="token-modal">
+    <div class="modal-box">
+      <h2 class="modal-title"><i class="fab fa-github"></i> GitHub Token</h2>
+      <p class="modal-subtitle">Enter Personal Access Token to view private repos</p>
+      <p id="token-status" style="font-size:0.82rem;margin-bottom:14px;"></p>
+      <div class="form-group">
+        <label class="form-label" for="token-input">Personal Access Token</label>
+        <input type="password" class="form-input" id="token-input" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+      </div>
+      <p style="font-size:0.75rem;color:var(--content-muted);margin-bottom:10px;"><i class="fas fa-shield-alt"></i> Stored in local browser storage only.</p>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" onclick="hideTokenModal()">Cancel</button>
+        <button class="modal-btn cancel" onclick="removeGhToken()" style="color:#f87171;">Remove</button>
+        <button class="modal-btn login" onclick="saveGhToken()">Save Token</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CV Wrapper -->
+  <div class="cv-wrapper" id="cv-wrapper">
+
+    <!-- Sidebar -->
+    <aside class="cv-sidebar">
+      <div class="profile-section">
+        <img src="ss.png" alt="S. M. Faruk Hasan" class="profile-avatar" id="profile-avatar">
+        <h1 class="profile-name" data-editable="name">S. M. FARUK HASAN</h1>
+        <p class="profile-title" data-editable="title">Full Stack Developer | Web & Mobile Solutions | AI Prompt Engineer</p>
+        <p class="dob-line"><i class="fas fa-birthday-cake"></i> 01 August 1998</p>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="sidebar-section-title"><span class="icon"><i class="fas fa-address-card"></i></span> Contact</h2>
+        <div class="contact-item"><span class="contact-icon"><i class="fas fa-phone"></i></span><span class="contact-text" data-editable="phone1">+8801300-065252</span></div>
+        <div class="contact-item"><span class="contact-icon"><i class="fas fa-phone"></i></span><span class="contact-text" data-editable="phone2">+8801677-373788</span></div>
+        <div class="contact-item"><span class="contact-icon"><i class="fas fa-envelope"></i></span><span class="contact-text"><a href="mailto:s.m.farukhasan98@gmail.com" data-editable="email">s.m.farukhasan98@gmail.com</a></span></div>
+        <div class="contact-item"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span><span class="contact-text" data-editable="address">2/1, Bolashpur Road, Bolashpur, Mymensingh, Bangladesh</span></div>
+        <div class="contact-item"><span class="contact-icon"><i class="fab fa-linkedin"></i></span><span class="contact-text"><a href="https://linkedin.com/in/s-m-faruk-hasan" target="_blank">s-m-faruk-hasan</a></span></div>
+        <div class="contact-item"><span class="contact-icon"><i class="fab fa-github"></i></span><span class="contact-text"><a href="https://github.com/smfarukhasan" target="_blank">smfarukhasan</a></span></div>
+        <div class="contact-item"><span class="contact-icon"><i class="fas fa-globe"></i></span><span class="contact-text"><a href="https://www.khubsoja.com" target="_blank">www.khubsoja.com</a></span></div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="sidebar-section-title"><span class="icon"><i class="fas fa-code"></i></span> Skills</h2>
+        <div class="skills-list" id="skills-list">
+          <span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express.js</span><span class="skill-tag">NestJS</span><span class="skill-tag">RESTful APIs</span>
+          <span class="skill-tag">React</span><span class="skill-tag">Next.js</span><span class="skill-tag">Tailwind CSS</span>
+          <span class="skill-tag">Modular CSS</span><span class="skill-tag">MySQL</span><span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Cloudflare</span><span class="skill-tag">Docker</span><span class="skill-tag">cPanel</span>
+          <span class="skill-tag">aaPanel</span><span class="skill-tag">GitHub</span><span class="skill-tag">VPS Linux</span>
+          <span class="skill-tag">Firebase</span><span class="skill-tag">Supabase</span><span class="skill-tag">Flutter</span>
+          <span class="skill-tag">Dart</span><span class="skill-tag">Kotlin</span><span class="skill-tag">AI Prompt Engineer</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="sidebar-section-title"><span class="icon"><i class="fas fa-graduation-cap"></i></span> Education</h2>
+        <div class="edu-item">
+          <div class="edu-degree" data-editable="edu-degree">BSc in Software Engineering</div>
+          <div class="edu-school" data-editable="edu-school">Daffodil International University, Bangladesh</div>
+          <div class="edu-date" data-editable="edu-date">Nov 2023</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="sidebar-section-title"><span class="icon"><i class="fas fa-language"></i></span> Language</h2>
+        <div class="language-item"><span class="language-name">Bangla</span><span class="language-level"><span class="language-dot active"></span><span class="language-dot active"></span><span class="language-dot active"></span><span class="language-dot active"></span><span class="language-dot active"></span></span></div>
+        <div class="language-item"><span class="language-name">English</span><span class="language-level"><span class="language-dot active"></span><span class="language-dot active"></span><span class="language-dot active"></span><span class="language-dot active"></span><span class="language-dot"></span></span></div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="sidebar-section-title"><span class="icon"><i class="fab fa-github"></i></span> GitHub Stats</h2>
+        <div class="github-stats" id="github-stats">
+          <div class="gh-stat"><div class="gh-stat-num" id="gh-repos-count">—</div><div class="gh-stat-label">Repos</div></div>
+          <div class="gh-stat"><div class="gh-stat-num" id="gh-followers-count">—</div><div class="gh-stat-label">Followers</div></div>
+          <div class="gh-stat"><div class="gh-stat-num" id="gh-following-count">—</div><div class="gh-stat-label">Following</div></div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="sidebar-section-title"><span class="icon"><i class="fas fa-user-tie"></i></span> References</h2>
+        <div class="ref-item">
+          <div class="ref-name" data-editable="ref1-name">Afsana Begum</div>
+          <div class="ref-title" data-editable="ref1-title">Assistant Professor & Coordinator M.Sc</div>
+          <div class="ref-org">Daffodil International University</div>
+          <div class="ref-contact-line"><span class="icon"><i class="fas fa-phone"></i></span> 01717-545414</div>
+          <div class="ref-contact-line"><span class="icon"><i class="fas fa-envelope"></i></span> afsana.swe@diu.edu.bd</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name" data-editable="ref2-name">Firoz Ahmed Talukder</div>
+          <div class="ref-title" data-editable="ref2-title">Lead Software Architect</div>
+          <div class="ref-org">BJIT Limited</div>
+          <div class="ref-contact-line"><span class="icon"><i class="fas fa-phone"></i></span> 01673-903636</div>
+          <div class="ref-contact-line"><span class="icon"><i class="fas fa-envelope"></i></span> firozsujan@gmail.com</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="cv-content">
+      <section class="content-section" id="sec-about">
+        <h2 class="section-title"><span class="icon"><i class="fas fa-user"></i></span> About Me</h2>
+        <p class="about-text" data-editable="about">
+          Passionate and self-motivated Software Engineer with practical experience in designing and developing web and mobile applications. Strong problem-solving skills, adaptability, and a continuous learning mindset. Committed to building efficient, user-focused software solutions and continuously improving technical expertise.
+        </p>
+      </section>
+
+      <section class="content-section" id="sec-experience">
+        <h2 class="section-title"><span class="icon"><i class="fas fa-briefcase"></i></span> Experience</h2>
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-role" data-editable="exp1-role">Full Stack Developer</span>
+            <span class="exp-date" data-editable="exp1-date">August 2024 — Present</span>
+          </div>
+          <div class="exp-company" data-editable="exp1-company">Khub Soja (Software Company)</div>
+          <ul class="exp-list">
+            <li data-editable="exp1-d1">Developed web and mobile applications for business and educational purposes.</li>
+            <li data-editable="exp1-d2">Build applications with REST API, MySQL, microservice architecture and dockerization.</li>
+            <li data-editable="exp1-d3">Integrated authentication, payment, and notification features.</li>
+            <li data-editable="exp1-d4">Maintained and improved existing applications.</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-role" data-editable="exp2-role">Jr. Software Developer</span>
+            <span class="exp-date" data-editable="exp2-date">February 2024 — August 2024</span>
+          </div>
+          <div class="exp-company" data-editable="exp2-company">Freelance IT (Software Company)</div>
+          <ul class="exp-list">
+            <li data-editable="exp2-d1">Worked directly with clients to understand requirements and deliver solutions.</li>
+            <li data-editable="exp2-d2">Delivered software presentations to clients, highlighting custom apps built with Flutter.</li>
+            <li data-editable="exp2-d3">Documented software issues and suggested improvements to senior developers.</li>
+            <li data-editable="exp2-d4">Provided online and offline support to clients, ensuring smooth software usage.</li>
+            <li data-editable="exp2-d5">Contributed to software enhancements, boosting functionality and client satisfaction.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="content-section" id="sec-projects">
+        <h2 class="section-title"><span class="icon"><i class="fas fa-project-diagram"></i></span> Projects</h2>
+        <div class="projects-grid" id="manual-projects">
+
+          <div class="project-card">
+            <div class="project-header"><span class="project-name" data-editable="p1-name">Official Web Application</span><span class="project-type">Web</span></div>
+            <p class="project-desc" data-editable="p1-desc">Developed a full-stack platform with product, software, and course management, order/payment flow, invoice generation, automated certificate generation, verification/download, live chat, interactive game, analytics dashboard, image CMS, and responsive dark/light UI.</p>
+            <div class="project-tech"><span class="tech-tag">React.js</span><span class="tech-tag">Tailwind CSS</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express.js</span><span class="tech-tag">MySQL</span><span class="tech-tag">Firebase</span><span class="tech-tag">JWT</span><span class="tech-tag">REST API</span></div>
+            <a class="project-link" href="https://www.khubsoja.com" target="_blank"><i class="fas fa-external-link-alt"></i> www.khubsoja.com</a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header"><span class="project-name" data-editable="p2-name">Chat Automation Platform</span><span class="project-type">Web</span></div>
+            <p class="project-desc" data-editable="p2-desc">Developed a web application for Facebook/WhatsApp chat automation, AI replies, inbox management, comment moderation, post scheduling, billing, token wallet, and usage reports.</p>
+            <div class="project-tech"><span class="tech-tag">React.js</span><span class="tech-tag">TypeScript</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Python</span><span class="tech-tag">MySQL</span><span class="tech-tag">Redis</span><span class="tech-tag">Docker</span><span class="tech-tag">OpenAI API</span></div>
+            <a class="project-link" href="https://www.chatbot.khubsoja.com" target="_blank"><i class="fas fa-external-link-alt"></i> www.chatbot.khubsoja.com</a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header"><span class="project-name" data-editable="p3-name">Tailoring & Clothing Management System</span><span class="project-type">Web</span></div>
+            <p class="project-desc" data-editable="p3-desc">Developed a tailoring and apparel management platform handling custom order measurements, tailor bidding, order tracking, and PDF receipts.</p>
+            <div class="project-tech"><span class="tech-tag">Next.js</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express.js</span><span class="tech-tag">MySQL</span><span class="tech-tag">Tailwind CSS</span></div>
+            <a class="project-link" href="https://www.selaibari.com" target="_blank"><i class="fas fa-external-link-alt"></i> www.selaibari.com</a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header"><span class="project-name" data-editable="p4-name">Hostel Management System</span><span class="project-type">Mobile & Web</span></div>
+            <p class="project-desc" data-editable="p4-desc">Implemented a system for hostel administration, covering room allocation, rent collection, and resident details management.</p>
+            <div class="project-tech"><span class="tech-tag">Flutter</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express.js</span><span class="tech-tag">MySQL</span><span class="tech-tag">Firebase</span></div>
+            <a class="project-link" href="https://www.aloyhostel.com.bd" target="_blank"><i class="fas fa-external-link-alt"></i> www.aloyhostel.com.bd</a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header"><span class="project-name" data-editable="p5-name">Restaurant Management System</span><span class="project-type">Android</span></div>
+            <p class="project-desc" data-editable="p5-desc">Developed an app for raw material management, recipe-based item creation, automatic stock deduction on sales, multi-role users, reports, employee & accounts management, receipt printing, and SMS notifications.</p>
+            <div class="project-tech"><span class="tech-tag">Flutter</span><span class="tech-tag">Firebase Auth</span><span class="tech-tag">Firestore</span><span class="tech-tag">Firebase Storage</span></div>
+            <span class="project-link"><i class="fas fa-play-circle"></i> Google Play Release in Progress</span>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header"><span class="project-name" data-editable="p6-name">Card To Contact</span><span class="project-type">Android</span></div>
+            <p class="project-desc" data-editable="p6-desc">Developed an Android application that scans business/visiting cards and uses AI APIs to extract structured contact information for saving directly to the device's contact list.</p>
+            <div class="project-tech"><span class="tech-tag">Kotlin</span><span class="tech-tag">Express.js</span><span class="tech-tag">MySQL</span><span class="tech-tag">Firebase</span><span class="tech-tag">OpenAI</span><span class="tech-tag">Gemini AI</span></div>
+            <a class="project-link" href="https://play.google.com/store/apps/details?id=com.khubsoja.cardtocontact" target="_blank"><i class="fab fa-google-play"></i> Google Play Store</a>
+          </div>
+        </div>
+
+        <!-- GitHub Repositories (Live Auto-Sync) -->
+        <div class="github-section-title">
+          <span class="gh-icon"><i class="fab fa-github"></i></span> GitHub Repositories
+          <span id="gh-loading" style="font-size:0.75rem; color:var(--content-muted);">(loading...)</span>
+        </div>
+        <div class="github-projects-grid" id="github-projects">
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+      </section>
+
+      <div class="last-updated" id="last-updated"></div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <div class="edit-indicator hidden" id="edit-indicator"><i class="fas fa-edit"></i> Edit Mode Active — Click any text to edit</div>
+
+  <!-- Dependencies & Modular Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/github.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

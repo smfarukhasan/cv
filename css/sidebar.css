@@ -1,0 +1,231 @@
+/* ===================================================
+   Sidebar Styles — Profile, Contact, Skills,
+   Education, Language, References, GitHub Stats
+   =================================================== */
+
+/* ---- SIDEBAR ---- */
+.cv-sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  background: var(--sidebar-bg-gradient);
+  color: var(--sidebar-text);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cv-sidebar::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cv-sidebar::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(103, 232, 249, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Profile Section */
+.profile-section {
+  padding: 36px 28px 24px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--sidebar-accent);
+  object-fit: cover;
+  margin-bottom: 18px;
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.25);
+  transition: var(--transition);
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(34, 211, 238, 0.4);
+}
+
+.profile-name {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.profile-title {
+  font-size: 0.82rem;
+  color: var(--sidebar-accent);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+}
+
+.dob-line {
+  font-size: 0.78rem;
+  color: var(--sidebar-muted);
+  margin-top: 8px;
+}
+
+/* Sidebar Sections */
+.sidebar-section {
+  padding: 18px 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-section + .sidebar-section {
+  border-top: 1px solid var(--sidebar-divider);
+}
+
+.sidebar-section-title {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--sidebar-heading);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-section-title .icon {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Contact Items */
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  color: var(--sidebar-text);
+  transition: var(--transition);
+}
+
+.contact-item:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  color: var(--sidebar-accent);
+  margin-top: 2px;
+  font-size: 0.9rem;
+}
+
+.contact-text { word-break: break-all; }
+.contact-text a { color: var(--sidebar-text); text-decoration: none; }
+.contact-text a:hover { color: #fff; text-decoration: none; }
+
+/* Skills */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tag {
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: var(--sidebar-text);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: var(--transition);
+  cursor: default;
+}
+
+.skill-tag:hover {
+  background: rgba(34, 211, 238, 0.2);
+  border-color: var(--sidebar-accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Education */
+.edu-item { margin-bottom: 8px; }
+.edu-degree { font-weight: 600; font-size: 0.85rem; color: #fff; }
+.edu-school { font-size: 0.8rem; color: var(--sidebar-muted); }
+.edu-date { font-size: 0.75rem; color: var(--sidebar-accent); font-weight: 500; }
+
+/* Language */
+.language-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 0.82rem;
+}
+
+.language-name { color: var(--sidebar-text); }
+.language-level { display: flex; gap: 3px; }
+
+.language-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(34, 211, 238, 0.2);
+}
+
+.language-dot.active {
+  background: var(--sidebar-accent);
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.4);
+}
+
+/* References */
+.ref-item { margin-bottom: 14px; }
+.ref-name { font-weight: 600; font-size: 0.85rem; color: #fff; }
+.ref-title { font-size: 0.78rem; color: var(--sidebar-muted); margin-bottom: 2px; }
+.ref-org { font-size: 0.75rem; color: var(--sidebar-accent); font-weight: 500; margin-bottom: 4px; }
+
+.ref-contact-line {
+  font-size: 0.75rem;
+  color: var(--sidebar-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ref-contact-line .icon {
+  color: var(--sidebar-accent);
+  font-size: 0.7rem;
+}
+
+/* GitHub Stats in Sidebar */
+.github-stats { display: flex; gap: 8px; margin-top: 8px; }
+
+.gh-stat {
+  background: rgba(34, 211, 238, 0.08);
+  border-radius: 8px;
+  padding: 6px 10px;
+  text-align: center;
+  flex: 1;
+}
+
+.gh-stat-num { font-size: 1.1rem; font-weight: 700; color: var(--sidebar-accent); }
+.gh-stat-label { font-size: 0.65rem; color: var(--sidebar-muted); text-transform: uppercase; letter-spacing: 0.5px; }

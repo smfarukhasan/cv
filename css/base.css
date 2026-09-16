@@ -1,0 +1,200 @@
+/* ===================================================
+   S. M. FARUK HASAN — Base Stylesheet
+   Variables, Reset, Layout, Animations
+   =================================================== */
+
+/* ---- Google Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* ---- CSS Custom Properties ---- */
+:root {
+  /* Sidebar (dark teal/navy) */
+  --sidebar-bg: #0f2027;
+  --sidebar-bg-gradient: linear-gradient(180deg, #0f2027 0%, #153040 40%, #1a3a4a 100%);
+  --sidebar-text: #e0e8ec;
+  --sidebar-heading: #67e8f9;
+  --sidebar-accent: #22d3ee;
+  --sidebar-muted: #94a8b8;
+  --sidebar-divider: rgba(103, 232, 249, 0.15);
+
+  /* Main content */
+  --content-bg: #ffffff;
+  --content-text: #1e293b;
+  --content-heading: #0f2027;
+  --content-accent: #0891b2;
+  --content-accent-light: #e0f7fa;
+  --content-muted: #64748b;
+  --content-divider: #e2e8f0;
+  --content-card-bg: #f8fafc;
+  --content-card-border: #e2e8f0;
+
+  /* General */
+  --font-primary: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-heading: 'Outfit', 'Inter', sans-serif;
+  --border-radius: 12px;
+  --border-radius-sm: 8px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Sidebar width */
+  --sidebar-width: 320px;
+}
+
+/* ---- Dark Mode Variables ---- */
+[data-theme="dark"] {
+  --content-bg: #0f172a;
+  --content-text: #e2e8f0;
+  --content-heading: #f1f5f9;
+  --content-accent: #22d3ee;
+  --content-accent-light: rgba(34, 211, 238, 0.1);
+  --content-muted: #94a3b8;
+  --content-divider: #1e293b;
+  --content-card-bg: #1e293b;
+  --content-card-border: #334155;
+}
+
+/* ---- Reset & Base ---- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: #e8ecf1;
+  color: var(--content-text);
+  line-height: 1.65;
+  min-height: 100vh;
+  padding-top: 50px;
+}
+
+a {
+  color: var(--content-accent);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--sidebar-accent);
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---- CV Container ---- */
+.cv-wrapper {
+  max-width: 1100px;
+  margin: 30px auto;
+  background: var(--content-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ---- Animations ---- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 800px) {
+  .cv-wrapper {
+    flex-direction: column;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .cv-sidebar {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .cv-content {
+    padding: 24px 20px;
+  }
+
+  .github-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-header {
+    flex-direction: column;
+  }
+}
+
+/* ---- PRINT / PDF STYLES ---- */
+@media print {
+  body {
+    padding-top: 0;
+    background: #fff;
+  }
+
+  .cv-topbar,
+  .edit-indicator,
+  .toast {
+    display: none !important;
+  }
+
+  .cv-wrapper {
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+    max-width: none;
+  }
+
+  .cv-sidebar {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .project-card:hover,
+  .gh-project-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
