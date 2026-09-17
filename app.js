@@ -7,6 +7,7 @@
 
 function init() {
   loadTheme();
+  if (typeof renderProjects === 'function') renderProjects();
   loadSavedEdits();
   checkAuth();
 

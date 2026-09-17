@@ -218,6 +218,45 @@
   color: #cbd5e1;
 }
 
+.project-highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+  padding-left: 2px;
+}
+
+.project-highlight-item {
+  font-size: 0.78rem;
+  color: var(--content-text);
+  line-height: 1.5;
+  position: relative;
+  padding-left: 14px;
+}
+
+.project-highlight-item::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--content-accent);
+  font-size: 0.82rem;
+  top: 0px;
+}
+
+.highlight-key {
+  font-weight: 600;
+  color: var(--content-heading);
+}
+
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
 .project-link {
   font-size: 0.74rem;
   font-weight: 600;
