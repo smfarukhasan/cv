@@ -30,15 +30,19 @@
   color: #ffffff;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  letter-spacing: 0.3px;
 }
 
-.topbar-brand .dot {
-  width: 8px;
-  height: 8px;
+.topbar-avatar {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 10px #38bdf8;
+  object-fit: cover;
+  object-position: 50% 8%;
+  border: 1.5px solid #38bdf8;
+  display: block;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
 }
 
 .topbar-btn {
