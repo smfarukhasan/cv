@@ -33,4 +33,17 @@ window.attemptLogin = attemptLogin;
 window.saveChanges = saveChanges;
 window.logout = logout;
 
+// CV Manager & Download Modal functions
+window.openDownloadModal = openDownloadModal;
+window.closeDownloadModal = closeDownloadModal;
+window.handleWebCV = handleWebCV;
+window.handleCustomCV = handleCustomCV;
+window.openCvManagerModal = openCvManagerModal;
+window.closeCvManagerModal = closeCvManagerModal;
+window.addCustomCv = addCustomCv;
+window.moveCvUp = moveCvUp;
+window.moveCvDown = moveCvDown;
+window.deleteCustomCv = deleteCustomCv;
+window.closePdfPreview = closePdfPreview;
+
 document.addEventListener('DOMContentLoaded', init);

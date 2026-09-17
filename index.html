@@ -15,8 +15,9 @@
   <nav class="cv-topbar" id="topbar">
     <div class="topbar-brand"><img src="ss.png" alt="S. M. Faruk Hasan" class="topbar-avatar"><span>S. M. Faruk Hasan</span></div>
     <button class="topbar-btn" id="btn-theme" title="Toggle Theme" onclick="toggleTheme()"><i class="fas fa-moon"></i> Theme</button>
-    <button class="topbar-btn primary" id="btn-download" title="Print or Save as A4 PDF" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> PDF Download</button>
+    <button class="topbar-btn primary" id="btn-download" title="Download or View CVs" onclick="openDownloadModal()"><i class="fas fa-file-pdf"></i> Download CV</button>
     <button class="topbar-btn" id="btn-login" title="Login to Edit" onclick="showLoginModal()"><i class="fas fa-lock"></i> Login</button>
+    <button class="topbar-btn hidden" id="btn-manage-cv" title="Manage Custom CVs" onclick="openCvManagerModal()"><i class="fas fa-tasks"></i> Manage CVs</button>
     <button class="topbar-btn save-btn hidden" id="btn-save" onclick="saveChanges()"><i class="fas fa-save"></i> Save</button>
     <button class="topbar-btn danger hidden" id="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
   </nav>
@@ -39,6 +40,56 @@
         <button class="modal-btn cancel" onclick="hideLoginModal()">Cancel</button>
         <button class="modal-btn login" onclick="attemptLogin()">Login</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Download CV Selection Modal -->
+  <div class="modal-overlay" id="download-cv-modal">
+    <div class="modal-box" style="width:500px;">
+      <h2 class="modal-title">📄 Download / View CV</h2>
+      <p class="modal-subtitle">Select CV format or version to view or download</p>
+      <div class="cv-download-list" id="cv-download-list"></div>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" onclick="closeDownloadModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom CV Manager Modal (Logged-In Edit Mode) -->
+  <div class="modal-overlay" id="manage-cv-modal">
+    <div class="modal-box" style="width:520px;">
+      <h2 class="modal-title">⚙️ Manage Custom CVs</h2>
+      <p class="modal-subtitle">Add custom CVs or change their display position</p>
+      <div class="cv-manager-form">
+        <div class="form-group" style="margin-bottom:8px;">
+          <label class="form-label">CV Title / Version Name</label>
+          <input type="text" class="form-input" id="cv-input-name" placeholder="e.g. Executive Resume 2026">
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+          <label class="form-label">File Path / Hosting URL / Google Drive Link</label>
+          <input type="text" class="form-input" id="cv-input-url" placeholder="customized_cv/my_cv.pdf or https://...">
+        </div>
+        <button class="modal-btn login" style="width:100%;" onclick="addCustomCv()"><i class="fas fa-plus"></i> Add to List</button>
+      </div>
+      <label class="form-label" style="margin-bottom:6px;">Custom CV List (Use ▲ / ▼ to set position):</label>
+      <div id="cv-manage-list" style="max-height:30vh;overflow-y:auto;margin-bottom:14px;"></div>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" onclick="closeCvManagerModal()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PDF Preview Modal -->
+  <div class="modal-overlay" id="preview-pdf-modal">
+    <div class="preview-modal-box">
+      <div class="preview-modal-header">
+        <span class="preview-modal-title" id="preview-pdf-title"><i class="fas fa-file-pdf"></i> PDF Preview</span>
+        <div class="preview-modal-actions">
+          <a id="preview-pdf-ext" href="#" target="_blank" class="cv-action-btn view" style="color:#fff;background:rgba(255,255,255,0.15);border:none;"><i class="fas fa-external-link-alt"></i> New Tab</a>
+          <button class="cv-order-btn" onclick="closePdfPreview()" style="color:#fff;background:rgba(255,255,255,0.15);border:none;font-size:0.9rem;"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <iframe class="preview-iframe" id="preview-pdf-iframe" src="about:blank"></iframe>
     </div>
   </div>
 
@@ -235,6 +286,7 @@
   <script src="js/theme.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/pdf.js"></script>
+  <script src="js/cv-manager.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
