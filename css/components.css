@@ -119,15 +119,15 @@
 }
 
 .modal-box {
-  background: #ffffff;
+  background: var(--content-card-bg, #ffffff);
   border-radius: var(--border-radius);
   padding: 34px 28px;
   width: 380px;
   max-width: 90vw;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
   transform: translateY(16px) scale(0.97);
   transition: var(--transition);
-  border: 1px solid var(--content-divider);
+  border: 1px solid var(--content-card-border, #e2e8f0);
 }
 
 .modal-overlay.active .modal-box {
@@ -138,14 +138,14 @@
   font-family: var(--font-heading);
   font-size: 1.35rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--content-heading, #0f172a);
   margin-bottom: 4px;
   text-align: center;
 }
 
 .modal-subtitle {
   font-size: 0.82rem;
-  color: var(--content-muted);
+  color: var(--content-muted, #64748b);
   text-align: center;
   margin-bottom: 22px;
 }
@@ -158,25 +158,25 @@
   display: block;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #334155;
+  color: var(--content-text, #334155);
   margin-bottom: 6px;
 }
 
 .form-input {
   width: 100%;
   padding: 10px 13px;
-  border: 1.5px solid #cbd5e1;
+  border: 1.5px solid var(--content-divider, #cbd5e1);
   border-radius: 7px;
   font-size: 0.88rem;
   font-family: var(--font-primary);
-  color: #0f172a;
+  color: var(--content-heading, #0f172a);
   transition: var(--transition);
-  background: #ffffff;
+  background: var(--content-bg, #ffffff);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: #0284c7;
+  border-color: var(--content-accent, #0284c7);
   box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
 }
 
@@ -211,13 +211,14 @@
 }
 
 .modal-btn.cancel {
-  background: #f1f5f9;
-  color: #475569;
-  border-color: #e2e8f0;
+  background: var(--content-bg, #f1f5f9);
+  color: var(--content-text, #475569);
+  border: 1px solid var(--content-divider, #e2e8f0);
 }
 
 .modal-btn.cancel:hover {
-  background: #e2e8f0;
+  background: var(--content-divider, #e2e8f0);
+  color: var(--content-heading, #0f172a);
 }
 
 .modal-btn.login {

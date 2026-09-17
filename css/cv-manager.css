@@ -19,17 +19,28 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  background: var(--content-card-bg, #ffffff);
+  background: var(--content-bg, #ffffff);
   border: 1.5px solid var(--content-divider, #e2e8f0);
   border-radius: var(--border-radius-sm, 8px);
   gap: 12px;
   transition: var(--transition, all 0.25s ease);
 }
 
+[data-theme="dark"] .cv-item-card {
+  background: #182647;
+  border-color: #263860;
+}
+
 .cv-item-card:hover {
   border-color: #0284c7;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
+}
+
+[data-theme="dark"] .cv-item-card:hover {
+  border-color: #38bdf8;
+  background: #1e3059;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.15);
 }
 
 .cv-item-info {
@@ -110,9 +121,21 @@
   border-color: #cbd5e1;
 }
 
+[data-theme="dark"] .cv-action-btn.view {
+  background: #24355a;
+  color: #e2e8f0;
+  border-color: #384c75;
+}
+
 .cv-action-btn.view:hover {
   background: #e2e8f0;
   color: #0f172a;
+}
+
+[data-theme="dark"] .cv-action-btn.view:hover {
+  background: #384c75;
+  color: #38bdf8;
+  border-color: #38bdf8;
 }
 
 .cv-action-btn.download {
@@ -151,6 +174,11 @@
   gap: 8px;
 }
 
+[data-theme="dark"] .cv-manage-item {
+  background: #182647;
+  border-color: #263860;
+}
+
 .cv-manage-title {
   font-weight: 600;
   font-size: 0.84rem;
@@ -181,9 +209,20 @@
   transition: all 0.2s;
 }
 
+[data-theme="dark"] .cv-order-btn {
+  background: #24355a;
+  border-color: #384c75;
+  color: #cbd5e1;
+}
+
 .cv-order-btn:hover:not(:disabled) {
   background: #e2e8f0;
   color: #0f172a;
+}
+
+[data-theme="dark"] .cv-order-btn:hover:not(:disabled) {
+  background: #384c75;
+  color: #38bdf8;
 }
 
 .cv-order-btn:disabled {
@@ -213,7 +252,7 @@
 
 /* PDF Preview Modal */
 .preview-modal-box {
-  background: #ffffff;
+  background: var(--content-card-bg, #ffffff);
   border-radius: 12px;
   width: 880px;
   max-width: 95vw;
@@ -221,7 +260,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--content-card-border, #e2e8f0);
 }
 
 .preview-modal-header {
