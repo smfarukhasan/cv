@@ -1,0 +1,208 @@
+/* ===================================================
+   S. M. FARUK HASAN — Projects Stylesheet
+   Grid, Cards, Reorder Controls, Highlights & Tags
+   =================================================== */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+/* Project Card */
+.project-card {
+  background: var(--content-card-bg);
+  border: 1px solid var(--content-card-border);
+  border-radius: var(--border-radius-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--content-card-hover-border);
+  box-shadow: var(--shadow-md);
+}
+
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.project-title-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--content-heading);
+  line-height: 1.35;
+}
+
+/* Position Reorder Controls (Visible ONLY in Edit Mode) */
+.project-order-controls {
+  display: none;
+}
+
+.edit-mode .project-order-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.proj-order-btn {
+  background: var(--content-bg, #f1f5f9);
+  border: 1px solid var(--content-divider, #cbd5e1);
+  color: var(--content-text, #475569);
+  width: 26px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.proj-order-btn:hover:not(:disabled) {
+  background: var(--content-accent, #0284c7);
+  color: #ffffff;
+  border-color: var(--content-accent, #0284c7);
+  transform: scale(1.08);
+}
+
+.proj-order-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+[data-theme="dark"] .proj-order-btn {
+  background: #1e293b;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .proj-order-btn:hover:not(:disabled) {
+  background: #38bdf8;
+  color: #0b1120;
+  border-color: #38bdf8;
+}
+
+.project-type {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--content-accent-light);
+  color: var(--content-accent);
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.project-desc {
+  font-size: 0.78rem;
+  color: var(--content-text);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.project-highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+  padding-left: 2px;
+}
+
+.project-highlight-item {
+  font-size: 0.78rem;
+  color: var(--content-text);
+  line-height: 1.5;
+  position: relative;
+  padding-left: 14px;
+}
+
+.project-highlight-item::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--content-accent);
+  font-size: 0.82rem;
+  top: 0px;
+}
+
+.highlight-key {
+  font-weight: 600;
+  color: var(--content-heading);
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.tech-tag {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .tech-tag {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+}
+
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.project-link {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--content-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 2px 0;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
+.project-badge-tag {
+  font-size: 0.72rem;
+  color: #059669;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+}
