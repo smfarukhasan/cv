@@ -2,9 +2,8 @@
    S. M. FARUK HASAN — CV Main Stylesheet (Modular)
    =================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @import url('css/base.css');
 @import url('css/sidebar.css');
 @import url('css/content.css');
-@import url('css/github.css');
 @import url('css/components.css');
+@import url('css/print.css');

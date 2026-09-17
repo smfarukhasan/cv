@@ -1,0 +1,158 @@
+/* ===================================================
+   S. M. FARUK HASAN — Dedicated A4 Print & PDF Styles
+   Precision layout for Standard A4 Paper (210mm x 297mm)
+   =================================================== */
+
+@page {
+  size: A4 portrait;
+  margin: 6mm 8mm 6mm 8mm;
+}
+
+@media print {
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 13.5px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Hide interactive controls */
+  .cv-topbar,
+  .edit-indicator,
+  .toast,
+  .modal-overlay,
+  .last-updated {
+    display: none !important;
+  }
+
+  /* Reset outer container to fill A4 sheet cleanly */
+  .cv-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+  }
+
+  /* Sidebar formatting for print */
+  .cv-sidebar {
+    width: 270px !important;
+    min-width: 270px !important;
+    padding: 24px 18px !important;
+    gap: 18px !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+
+  .profile-avatar {
+    width: 125px !important;
+    height: 125px !important;
+  }
+
+  .profile-name {
+    font-size: 1.3rem !important;
+  }
+
+  .profile-title {
+    font-size: 0.78rem !important;
+  }
+
+  .sidebar-section-title {
+    font-size: 0.85rem !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .contact-item {
+    font-size: 0.78rem !important;
+    margin-bottom: 7px !important;
+  }
+
+  .skill-tag {
+    font-size: 0.68rem !important;
+    padding: 2px 7px !important;
+  }
+
+  /* Main content formatting for print */
+  .cv-content {
+    padding: 24px 24px !important;
+    gap: 20px !important;
+  }
+
+  .section-title {
+    font-size: 1rem !important;
+    margin-bottom: 12px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .about-text {
+    font-size: 0.82rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .exp-item {
+    margin-bottom: 14px !important;
+  }
+
+  .exp-role {
+    font-size: 0.88rem !important;
+  }
+
+  .exp-list li {
+    font-size: 0.78rem !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Projects Grid for print */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .project-card {
+    padding: 12px 14px !important;
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .project-name {
+    font-size: 0.86rem !important;
+  }
+
+  .project-desc {
+    font-size: 0.74rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .project-link {
+    font-size: 0.72rem !important;
+  }
+
+  /* Page break rules to prevent awkward slicing */
+  .project-card,
+  .exp-item,
+  .sidebar-section,
+  .edu-item,
+  .profile-section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+}

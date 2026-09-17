@@ -59,7 +59,6 @@ function enterEditMode() {
   if (dom.btnLogin) dom.btnLogin.classList.add('hidden');
   if (dom.btnSave) dom.btnSave.classList.remove('hidden');
   if (dom.btnLogout) dom.btnLogout.classList.remove('hidden');
-  if (dom.btnGhToken) dom.btnGhToken.classList.remove('hidden');
   if (dom.editIndicator) dom.editIndicator.classList.remove('hidden');
 
   $$('[data-editable]').forEach((el) => {
@@ -73,7 +72,6 @@ function exitEditMode() {
   if (dom.btnLogin) dom.btnLogin.classList.remove('hidden');
   if (dom.btnSave) dom.btnSave.classList.add('hidden');
   if (dom.btnLogout) dom.btnLogout.classList.add('hidden');
-  if (dom.btnGhToken) dom.btnGhToken.classList.add('hidden');
   if (dom.editIndicator) dom.editIndicator.classList.add('hidden');
 
   $$('[data-editable]').forEach((el) => {

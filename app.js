@@ -1,17 +1,14 @@
 /**
  * =========================================================
- *  S. M. Faruk Hasan — Dynamic CV Application (Main Entry)
+ *  S. M. Faruk Hasan — Executive CV Application
+ *  Main Application Coordinator
  * =========================================================
  */
 
 function init() {
   loadTheme();
   loadSavedEdits();
-  loadGhToken();
   checkAuth();
-  fetchGitHubProfile();
-  fetchGitHubRepos();
-  setLastUpdated();
 
   // Keyboard accessibility
   if (dom.loginPass) {
@@ -24,24 +21,16 @@ function init() {
       if (e.key === 'Enter' && dom.loginPass) dom.loginPass.focus();
     });
   }
-  if (dom.tokenInput) {
-    dom.tokenInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') saveGhToken();
-    });
-  }
 }
 
 // Global functions for inline HTML event handlers
 window.toggleTheme = toggleTheme;
 window.downloadPDF = downloadPDF;
+window.downloadDirectPDF = downloadDirectPDF;
 window.showLoginModal = showLoginModal;
 window.hideLoginModal = hideLoginModal;
 window.attemptLogin = attemptLogin;
 window.saveChanges = saveChanges;
 window.logout = logout;
-window.showTokenModal = showTokenModal;
-window.hideTokenModal = hideTokenModal;
-window.saveGhToken = saveGhToken;
-window.removeGhToken = removeGhToken;
 
 document.addEventListener('DOMContentLoaded', init);

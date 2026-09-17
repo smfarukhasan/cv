@@ -1,29 +1,29 @@
 /**
  * =========================================================
- *  PDF Generation & Download Module
- *  Uses: html2pdf.js bundle
+ *  A4 Print & PDF Generation Module
+ *  Optimized for standard A4 paper (210mm x 297mm)
  * =========================================================
  */
 
 function downloadPDF() {
-  showToast('📄 Generating PDF... please wait.', 'info');
+  showToast('🖨️ Opening A4 Print / Save as PDF dialog...', 'info');
+  setTimeout(() => {
+    window.print();
+  }, 250);
+}
 
+function downloadDirectPDF() {
+  showToast('📄 Generating A4 PDF file... please wait.', 'info');
   const element = dom.cvWrapper;
-  const topbar = $('#topbar');
-  const indicator = dom.editIndicator;
-
-  if (topbar) topbar.style.display = 'none';
-  if (indicator) indicator.classList.add('hidden');
 
   const opt = {
-    margin: 0,
+    margin: [6, 8, 6, 8],
     filename: 'S_M_Faruk_Hasan_CV.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: {
       scale: 2,
       useCORS: true,
       logging: false,
-      letterRendering: true,
     },
     jsPDF: {
       unit: 'mm',
@@ -33,26 +33,14 @@ function downloadPDF() {
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
   };
 
-  if (typeof html2pdf === 'undefined') {
-    if (topbar) topbar.style.display = '';
-    if (isEditMode && indicator) indicator.classList.remove('hidden');
-    showToast('❌ PDF library not loaded. Please refresh.', 'error');
-    return;
+  if (typeof html2pdf !== 'undefined') {
+    html2pdf().set(opt).from(element).save()
+      .then(() => showToast('✅ PDF downloaded successfully!', 'success'))
+      .catch((err) => {
+        console.error('PDF error:', err);
+        window.print();
+      });
+  } else {
+    window.print();
   }
-
-  html2pdf()
-    .set(opt)
-    .from(element)
-    .save()
-    .then(() => {
-      if (topbar) topbar.style.display = '';
-      if (isEditMode && indicator) indicator.classList.remove('hidden');
-      showToast('✅ PDF downloaded successfully!', 'success');
-    })
-    .catch((err) => {
-      if (topbar) topbar.style.display = '';
-      if (isEditMode && indicator) indicator.classList.remove('hidden');
-      console.error('PDF generation failed:', err);
-      showToast('❌ PDF generation failed. Please try again.', 'error');
-    });
 }
