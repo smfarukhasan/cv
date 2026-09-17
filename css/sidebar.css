@@ -29,14 +29,14 @@
 }
 
 .profile-avatar {
-  width: 145px;
-  height: 145px;
+  width: 175px;
+  height: 175px;
   border-radius: 50%;
   border: 3px solid rgba(56, 189, 248, 0.5);
   object-fit: cover;
-  object-position: 50% 8%;
+  object-position: 50% 16%;
   display: block;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
   transition: var(--transition);
 }
 

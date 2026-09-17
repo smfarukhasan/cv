@@ -6,6 +6,8 @@
   <meta name="description" content="S. M. Faruk Hasan — Full Stack Developer | Web & Mobile Solutions | AI Prompt Engineer. Executive CV & Portfolio.">
   <title>S. M. Faruk Hasan — CV | Full Stack Developer</title>
   <link rel="icon" href="ss.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -13,29 +15,29 @@
 
   <!-- Top Navigation Controls -->
   <nav class="cv-topbar" id="topbar">
-    <div class="topbar-brand"><img src="ss.png" alt="S. M. Faruk Hasan" class="topbar-avatar"><span>S. M. Faruk Hasan</span></div>
-    <button class="topbar-btn" id="btn-theme" title="Toggle Theme" onclick="toggleTheme()"><i class="fas fa-moon"></i> Theme</button>
-    <button class="topbar-btn primary" id="btn-download" title="Download or View CVs" onclick="openDownloadModal()"><i class="fas fa-file-pdf"></i> Download CV</button>
-    <button class="topbar-btn" id="btn-login" title="Login to Edit" onclick="showLoginModal()"><i class="fas fa-lock"></i> Login</button>
-    <button class="topbar-btn hidden" id="btn-manage-cv" title="Manage Custom CVs" onclick="openCvManagerModal()"><i class="fas fa-tasks"></i> Manage CVs</button>
-    <button class="topbar-btn save-btn hidden" id="btn-save" onclick="saveChanges()"><i class="fas fa-save"></i> Save</button>
-    <button class="topbar-btn danger hidden" id="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <div class="topbar-brand"><img src="ss.png" alt="S. M. Faruk Hasan" class="topbar-avatar" decoding="async"><span>S. M. Faruk Hasan</span></div>
+    <button class="topbar-btn" id="btn-theme" title="Toggle Theme" onclick="toggleTheme()"><i class="fas fa-moon"></i> <span>Theme</span></button>
+    <button class="topbar-btn primary" id="btn-download" title="Download or View CVs" onclick="openDownloadModal()"><i class="fas fa-file-pdf"></i> <span>Download CV</span></button>
+    <button class="topbar-btn" id="btn-login" title="Login to Edit" onclick="showLoginModal()"><i class="fas fa-lock"></i> <span>Login</span></button>
+    <button class="topbar-btn hidden" id="btn-manage-cv" title="Manage Custom CVs" onclick="openCvManagerModal()"><i class="fas fa-tasks"></i> <span>Manage CVs</span></button>
+    <button class="topbar-btn save-btn hidden" id="btn-save" onclick="saveChanges()"><i class="fas fa-save"></i> <span>Save</span></button>
+    <button class="topbar-btn danger hidden" id="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button>
   </nav>
 
   <!-- Login Modal -->
   <div class="modal-overlay" id="login-modal">
     <div class="modal-box">
-      <h2 class="modal-title">🔐 Login</h2>
-      <p class="modal-subtitle">Enter credentials to edit CV</p>
+      <h2 class="modal-title">🔐 Admin Login</h2>
+      <p class="modal-subtitle">Authenticate to enable live editing mode</p>
       <div class="form-group">
-        <label class="form-label" for="login-uid">User ID</label>
-        <input type="text" class="form-input" id="login-uid" placeholder="Enter User ID" autocomplete="off">
+        <label class="form-label">User ID / Mobile</label>
+        <input type="text" class="form-input" id="login-uid" placeholder="Enter User ID" autocomplete="username">
       </div>
       <div class="form-group">
-        <label class="form-label" for="login-pass">Password</label>
-        <input type="password" class="form-input" id="login-pass" placeholder="Enter Password" autocomplete="off">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="login-pass" placeholder="Enter Password" autocomplete="current-password">
       </div>
-      <p class="form-error" id="login-error">❌ Invalid credentials.</p>
+      <div class="form-error" id="login-error">Invalid User ID or Password</div>
       <div class="modal-actions">
         <button class="modal-btn cancel" onclick="hideLoginModal()">Cancel</button>
         <button class="modal-btn login" onclick="attemptLogin()">Login</button>
@@ -45,7 +47,7 @@
 
   <!-- Download CV Selection Modal -->
   <div class="modal-overlay" id="download-cv-modal">
-    <div class="modal-box" style="width:500px;">
+    <div class="modal-box download-modal">
       <h2 class="modal-title">📄 Download / View CV</h2>
       <p class="modal-subtitle">Select CV format or version to view or download</p>
       <div class="cv-download-list" id="cv-download-list"></div>
@@ -57,7 +59,7 @@
 
   <!-- Custom CV Manager Modal (Logged-In Edit Mode) -->
   <div class="modal-overlay" id="manage-cv-modal">
-    <div class="modal-box" style="width:520px;">
+    <div class="modal-box manager-modal">
       <h2 class="modal-title">⚙️ Manage Custom CVs</h2>
       <p class="modal-subtitle">Add custom CVs or change their display position</p>
       <div class="cv-manager-form">
@@ -213,7 +215,7 @@
   </div>
 
   <div class="toast" id="toast"></div>
-  <div class="edit-indicator hidden" id="edit-indicator"><i class="fas fa-edit"></i> Edit Mode Active — Click any text to edit</div>
+  <div class="edit-indicator hidden inactive" id="edit-indicator" onclick="toggleEditMode()" title="Click to toggle text editing mode"><i class="fas fa-pencil-alt"></i> <span id="edit-indicator-text">Edit Mode: OFF (Click to Enable)</span></div>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>

@@ -124,27 +124,3 @@ a:hover {
   25% { transform: translateX(-5px); }
   75% { transform: translateX(5px); }
 }
-
-/* Responsive Tablet/Mobile */
-@media (max-width: 860px) {
-  body {
-    padding-top: 55px;
-    padding-bottom: 20px;
-  }
-
-  .cv-wrapper {
-    flex-direction: column;
-    margin: 0;
-    border-radius: 0;
-    border: none;
-  }
-
-  .cv-sidebar {
-    width: 100% !important;
-    min-width: 100% !important;
-  }
-
-  .cv-content {
-    padding: 28px 20px !important;
-  }
-}

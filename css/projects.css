@@ -50,11 +50,12 @@
   line-height: 1.35;
 }
 
-/* Position Reorder Controls (Visible ONLY in Edit Mode) */
+/* Position Reorder Controls (Visible in Logged-In Mode) */
 .project-order-controls {
   display: none;
 }
 
+.logged-in .project-order-controls,
 .edit-mode .project-order-controls {
   display: inline-flex;
   align-items: center;

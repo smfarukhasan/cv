@@ -25,11 +25,10 @@ function attemptLogin() {
   const pass = dom.loginPass ? dom.loginPass.value.trim() : '';
 
   if (uid === CONFIG.credentials.uid && pass === CONFIG.credentials.pass) {
-    isLoggedIn = true;
     localStorage.setItem(CONFIG.storageKeys.auth, 'true');
     hideLoginModal();
-    enterEditMode();
-    showToast('✅ Login successful! You can now edit the CV.', 'success');
+    setLoggedInUI(true);
+    showToast('✅ Logged in successfully! Text is locked by default.', 'success');
   } else {
     if (dom.loginError) dom.loginError.classList.add('show');
     if (dom.loginPass) {
@@ -41,46 +40,73 @@ function attemptLogin() {
 
 function checkAuth() {
   if (localStorage.getItem(CONFIG.storageKeys.auth) === 'true') {
-    isLoggedIn = true;
-    enterEditMode();
+    setLoggedInUI(true);
   }
 }
 
 function logout() {
-  isLoggedIn = false;
   localStorage.removeItem(CONFIG.storageKeys.auth);
-  exitEditMode();
+  setLoggedInUI(false);
   showToast('🔒 Logged out successfully.', 'info');
 }
 
-function enterEditMode() {
-  isEditMode = true;
-  if (dom.cvWrapper) dom.cvWrapper.classList.add('edit-mode');
-  if (dom.btnLogin) dom.btnLogin.classList.add('hidden');
-  if (dom.btnSave) dom.btnSave.classList.remove('hidden');
-  if (dom.btnLogout) dom.btnLogout.classList.remove('hidden');
+function setLoggedInUI(state) {
+  isLoggedIn = state;
+  if (dom.btnLogin) dom.btnLogin.classList.toggle('hidden', state);
+  if (dom.btnSave) dom.btnSave.classList.toggle('hidden', !state);
+  if (dom.btnLogout) dom.btnLogout.classList.toggle('hidden', !state);
   const btnManage = $('#btn-manage-cv');
-  if (btnManage) btnManage.classList.remove('hidden');
-  if (dom.editIndicator) dom.editIndicator.classList.remove('hidden');
+  if (btnManage) btnManage.classList.toggle('hidden', !state);
+  if (dom.cvWrapper) dom.cvWrapper.classList.toggle('logged-in', state);
+
+  if (dom.editIndicator) {
+    dom.editIndicator.classList.toggle('hidden', !state);
+  }
+
+  // Always default edit mode to inactive on login or logout
+  setEditMode(false);
+
+  // Refresh download list to show or hide inline reordering controls
+  if (typeof renderDownloadList === 'function') renderDownloadList();
+}
+
+function setEditMode(enable) {
+  isEditMode = enable;
+  if (dom.cvWrapper) dom.cvWrapper.classList.toggle('edit-mode', enable);
+
+  const indicator = dom.editIndicator;
+  const indicatorText = $('#edit-indicator-text');
+
+  if (indicator) {
+    indicator.classList.toggle('inactive', !enable);
+    if (indicatorText) {
+      indicatorText.textContent = enable
+        ? 'Edit Mode: ON (Click to Disable)'
+        : 'Edit Mode: OFF (Click to Enable)';
+    }
+    const icon = indicator.querySelector('i');
+    if (icon) {
+      icon.className = enable ? 'fas fa-check-circle' : 'fas fa-pencil-alt';
+    }
+  }
 
   $$('[data-editable]').forEach((el) => {
-    el.setAttribute('contenteditable', 'true');
+    if (enable) {
+      el.setAttribute('contenteditable', 'true');
+    } else {
+      el.removeAttribute('contenteditable');
+    }
   });
 }
 
-function exitEditMode() {
-  isEditMode = false;
-  if (dom.cvWrapper) dom.cvWrapper.classList.remove('edit-mode');
-  if (dom.btnLogin) dom.btnLogin.classList.remove('hidden');
-  if (dom.btnSave) dom.btnSave.classList.add('hidden');
-  if (dom.btnLogout) dom.btnLogout.classList.add('hidden');
-  const btnManage = $('#btn-manage-cv');
-  if (btnManage) btnManage.classList.add('hidden');
-  if (dom.editIndicator) dom.editIndicator.classList.add('hidden');
-
-  $$('[data-editable]').forEach((el) => {
-    el.removeAttribute('contenteditable');
-  });
+function toggleEditMode() {
+  if (!isLoggedIn) return;
+  setEditMode(!isEditMode);
+  if (isEditMode) {
+    showToast('✏️ Edit mode enabled. Click any text to edit.', 'success');
+  } else {
+    showToast('🔒 Edit mode disabled. Text is locked.', 'info');
+  }
 }
 
 function saveChanges() {

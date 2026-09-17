@@ -83,6 +83,11 @@ function renderDownloadList() {
   // 3, 4, ... Custom CVs
   customCvs.forEach((cv, idx) => {
     const serial = idx + 3;
+    const reorderBtns = (typeof isLoggedIn !== 'undefined' && isLoggedIn) ? `
+      <button class="cv-order-btn" title="Move Up" ${idx === 0 ? 'disabled' : ''} onclick="moveCvUp(${idx})">▲</button>
+      <button class="cv-order-btn" title="Move Down" ${idx === customCvs.length - 1 ? 'disabled' : ''} onclick="moveCvDown(${idx})">▼</button>
+    ` : '';
+
     html += `
       <div class="cv-item-card">
         <div class="cv-item-info">
@@ -93,6 +98,7 @@ function renderDownloadList() {
           </div>
         </div>
         <div class="cv-actions-group">
+          ${reorderBtns}
           <button class="cv-action-btn view" onclick="handleCustomCV('${encodeURI(cv.url)}', '${escapeHtml(cv.name)}', 'view')" title="Preview PDF"><i class="fas fa-eye"></i> View</button>
           <button class="cv-action-btn download" onclick="handleCustomCV('${encodeURI(cv.url)}', '${escapeHtml(cv.name)}', 'download')" title="Download PDF"><i class="fas fa-download"></i> Download</button>
         </div>
@@ -240,4 +246,35 @@ function deleteCustomCv(index) {
   const removed = list.splice(index, 1);
   saveCustomCvs(list);
   showToast(`🗑️ Removed "${removed[0]?.name || 'CV'}"`, 'info');
+}
+
+/* Auto-discover newly uploaded PDFs in customized_cv folder from GitHub */
+async function syncGitHubCustomCvs() {
+  try {
+    const res = await fetch('https://api.github.com/repos/smfarukhasan/cv/contents/customized_cv');
+    if (!res.ok) return;
+    const files = await res.json();
+    if (!Array.isArray(files)) return;
+
+    const list = getCustomCvs();
+    let changed = false;
+
+    files.forEach((f) => {
+      if (f.name && f.name.toLowerCase().endsWith('.pdf')) {
+        const path = `customized_cv/${f.name}`;
+        const exists = list.some((item) => item.url === path || item.url.endsWith(f.name));
+        if (!exists) {
+          const title = f.name.replace(/\.pdf$/i, '').replace(/[_-]/g, ' ') + ' (Custom CV)';
+          list.push({ id: `cv-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`, name: title, url: path });
+          changed = true;
+        }
+      }
+    });
+
+    if (changed) {
+      saveCustomCvs(list);
+    }
+  } catch (e) {
+    // Graceful offline fallback
+  }
 }

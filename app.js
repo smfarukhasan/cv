@@ -10,6 +10,7 @@ function init() {
   if (typeof renderProjects === 'function') renderProjects();
   loadSavedEdits();
   checkAuth();
+  if (typeof syncGitHubCustomCvs === 'function') syncGitHubCustomCvs();
 
   // Keyboard accessibility
   if (dom.loginPass) {
@@ -26,6 +27,7 @@ function init() {
 
 // Global functions for inline HTML event handlers
 window.toggleTheme = toggleTheme;
+window.toggleEditMode = toggleEditMode;
 window.downloadPDF = downloadPDF;
 window.downloadDirectPDF = downloadDirectPDF;
 window.showLoginModal = showLoginModal;
