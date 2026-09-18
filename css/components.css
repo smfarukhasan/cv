@@ -56,15 +56,52 @@
   font-family: var(--font-primary);
   cursor: pointer;
   transition: var(--transition);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  user-select: none;
 }
 
 .topbar-btn:hover {
   background: rgba(255, 255, 255, 0.16);
   border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-1px);
+  color: #ffffff;
+  text-decoration: none !important;
+}
+
+/* Portfolio Button - Dedicated Seamless Look */
+.topbar-btn.portfolio-btn {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.18) 0%, rgba(56, 189, 248, 0.22) 100%);
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #38bdf8;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.12);
+}
+
+.topbar-btn.portfolio-btn:hover {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.35) 0%, rgba(56, 189, 248, 0.42) 100%);
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+  transform: translateY(-1px);
+}
+
+.topbar-btn.portfolio-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.topbar-btn.portfolio-btn i {
+  color: #38bdf8;
+  transition: var(--transition);
+}
+
+.topbar-btn.portfolio-btn:hover i {
+  color: #ffffff;
+  transform: scale(1.1);
 }
 
 .topbar-btn.primary {

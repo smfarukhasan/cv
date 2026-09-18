@@ -6,6 +6,22 @@
   <meta name="description" content="S. M. Faruk Hasan — Full Stack Developer | Web & Mobile Solutions | AI Prompt Engineer. Executive CV & Portfolio.">
   <title>S. M. Faruk Hasan — CV | Full Stack Developer</title>
   <link rel="icon" href="ss.png" type="image/png">
+  <!-- Instant Portfolio Navigation & Speculation Rules -->
+  <link rel="preconnect" href="https://smfarukhasan.bro.bd" crossorigin>
+  <link rel="dns-prefetch" href="https://smfarukhasan.bro.bd">
+  <link rel="prefetch" href="https://smfarukhasan.bro.bd/">
+  <link rel="prerender" href="https://smfarukhasan.bro.bd/">
+  <script type="speculationrules">
+  {
+    "prerender": [
+      {
+        "source": "list",
+        "urls": ["https://smfarukhasan.bro.bd/"]
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -16,11 +32,12 @@
   <!-- Top Navigation Controls -->
   <nav class="cv-topbar" id="topbar">
     <div class="topbar-brand"><img src="ss.png" alt="S. M. Faruk Hasan" class="topbar-avatar" decoding="async"><span>S. M. Faruk Hasan</span></div>
-    <button class="topbar-btn" id="btn-theme" title="Toggle Theme" onclick="toggleTheme()"><i class="fas fa-moon"></i> <span>Theme</span></button>
+    <a href="https://smfarukhasan.bro.bd/" class="topbar-btn portfolio-btn" id="btn-portfolio" title="View Portfolio Website"><i class="fas fa-briefcase"></i> <span>Portfolio</span></a>
     <button class="topbar-btn primary" id="btn-download" title="Download or View CVs" onclick="openDownloadModal()"><i class="fas fa-file-pdf"></i> <span>Download CV</span></button>
-    <button class="topbar-btn" id="btn-login" title="Login to Edit" onclick="showLoginModal()"><i class="fas fa-lock"></i> <span>Login</span></button>
     <button class="topbar-btn hidden" id="btn-manage-cv" title="Manage Custom CVs" onclick="openCvManagerModal()"><i class="fas fa-tasks"></i> <span>Manage CVs</span></button>
     <button class="topbar-btn save-btn hidden" id="btn-save" onclick="saveChanges()"><i class="fas fa-save"></i> <span>Save</span></button>
+    <button class="topbar-btn" id="btn-theme" title="Toggle Theme" onclick="toggleTheme()"><i class="fas fa-moon"></i> <span>Theme</span></button>
+    <button class="topbar-btn" id="btn-login" title="Login to Edit" onclick="showLoginModal()"><i class="fas fa-lock"></i> <span>Login</span></button>
     <button class="topbar-btn danger hidden" id="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button>
   </nav>
 

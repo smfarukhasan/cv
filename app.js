@@ -23,6 +23,23 @@ function init() {
       if (e.key === 'Enter' && dom.loginPass) dom.loginPass.focus();
     });
   }
+
+  // Portfolio button instant prefetch & prerender on interaction
+  const portfolioBtn = document.getElementById('btn-portfolio');
+  if (portfolioBtn) {
+    const triggerPrerender = () => {
+      if (!document.querySelector('link[data-portfolio-prerender]')) {
+        const link = document.createElement('link');
+        link.rel = 'prerender';
+        link.href = 'https://smfarukhasan.bro.bd/';
+        link.setAttribute('data-portfolio-prerender', 'true');
+        document.head.appendChild(link);
+      }
+    };
+    portfolioBtn.addEventListener('mouseenter', triggerPrerender, { passive: true });
+    portfolioBtn.addEventListener('touchstart', triggerPrerender, { passive: true });
+    portfolioBtn.addEventListener('focus', triggerPrerender, { passive: true });
+  }
 }
 
 // Global functions for inline HTML event handlers
